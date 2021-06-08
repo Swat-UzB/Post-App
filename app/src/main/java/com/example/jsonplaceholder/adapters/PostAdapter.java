@@ -16,7 +16,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     private List<Post> postList;
 
-
     public void setPostList(List<Post> postList) {
         this.postList.clear();
         this.postList.addAll(postList);
@@ -36,10 +35,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.PostViewHolder holder, int position) {
         Post post = postList.get(position);
-        holder.postItemBinding.textViewPostId.setText(post.getId());
+        holder.postItemBinding.textViewPostId.setText(String.valueOf(post.getId()));
         holder.postItemBinding.textViewBody.setText(post.getBody());
         holder.postItemBinding.textViewTitle.setText(post.getTitle());
-        holder.postItemBinding.textViewUserId.setText(post.getUserId());
+        holder.postItemBinding.textViewUserId.setText(String.valueOf(post.getUserId()));
     }
 
     @Override
