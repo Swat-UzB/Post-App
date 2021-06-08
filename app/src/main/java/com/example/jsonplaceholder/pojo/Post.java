@@ -21,31 +21,35 @@ public class Post {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public Post setUserId(int userId) {
         this.userId = userId;
+        return this;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Post setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Post setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public Post setBody(String body) {
         this.body = body;
+        return this;
     }
 }
