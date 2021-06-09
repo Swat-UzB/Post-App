@@ -1,18 +1,25 @@
 package com.example.jsonplaceholder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.jsonplaceholder.adapters.PostAdapter;
+import com.example.jsonplaceholder.api.ApiFactory;
+import com.example.jsonplaceholder.api.ApiService;
 import com.example.jsonplaceholder.databinding.ActivityMainBinding;
 import com.example.jsonplaceholder.pojo.Post;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import rx.Subscriber;
+import rx.schedulers.Schedulers;
+
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
@@ -28,9 +35,23 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mainBinding.recyclerView.setAdapter(postAdapter);
         List<Post> posts = new ArrayList<>();
-        posts.add(new Post().setTitle("hello").setId(1).setBody("sasasassasasasasasasaasas").setUserId(111));
-        posts.add(new Post().setTitle("hellodsds").setId(1).setBody("sasasadsdsdsdsdsssasasasasasasaasas").setUserId(111));
-        posts.add(new Post().setTitle("hi").setId(1).setBody("sasasadsdsdsdssdsdsdssdsssasasasasasasaasas").setUserId(111));
         postAdapter.setPostList(posts);
+        ApiFactory apiFactory = ApiFactory.getInstance();
+        ApiService apiService = apiFactory.getApiService();
+//        apiService.getPosts()
+////                .subscribeOn(Schedulers.io())
+////                .observeOn()
+////                .subscribe(new Subscriber<List<Post>>() {
+////                    @Override
+////                    public void onCompleted() {
+////
+////                    }
+////                    @Override
+////                    public void onError(Throwable e) {
+////                    }
+////                    @Override
+////                    public void onNext(List<Post> posts) {
+////                    }
+////                })
     }
 }
