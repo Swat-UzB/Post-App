@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import rx.Scheduler;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
@@ -38,20 +39,20 @@ public class MainActivity extends AppCompatActivity {
         postAdapter.setPostList(posts);
         ApiFactory apiFactory = ApiFactory.getInstance();
         ApiService apiService = apiFactory.getApiService();
-//        apiService.getPosts()
-////                .subscribeOn(Schedulers.io())
-////                .observeOn()
-////                .subscribe(new Subscriber<List<Post>>() {
-////                    @Override
-////                    public void onCompleted() {
-////
-////                    }
-////                    @Override
-////                    public void onError(Throwable e) {
-////                    }
-////                    @Override
-////                    public void onNext(List<Post> posts) {
-////                    }
-////                })
+        apiService.getPosts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .subscribe(new Consumer<List<Post>>() {
+                               @Override
+                               public void accept(List<Post> posts) {
+
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) {
+
+                               }
+                           }
+                );
     }
 }

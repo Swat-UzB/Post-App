@@ -12,8 +12,7 @@ public class ApiFactory {
     public static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
 
     private ApiFactory() {
-        retrofit = new Retrofit
-                .Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
