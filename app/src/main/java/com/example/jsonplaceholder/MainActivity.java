@@ -1,7 +1,6 @@
 package com.example.jsonplaceholder;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
@@ -16,10 +15,11 @@ import com.example.jsonplaceholder.pojo.Post;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,15 +41,26 @@ public class MainActivity extends AppCompatActivity {
         ApiService apiService = apiFactory.getApiService();
         apiService.getPosts()
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .subscribe(new Consumer<List<Post>>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Post>>() {
+
                                @Override
-                               public void accept(List<Post> posts) {
+                               public void onSubscribe( Disposable d) {
 
                                }
-                           }, new Consumer<Throwable>() {
+
                                @Override
-                               public void accept(Throwable throwable) {
+                               public void onNext( List<Post> posts) {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+
+                               }
+
+                               @Override
+                               public void onComplete() {
 
                                }
                            }
