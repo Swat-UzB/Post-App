@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">JsonPlaceHolder</string>
     <string name="userid">UserId:</string>
+    <string name="postid">PostId:</string>
 </resources>

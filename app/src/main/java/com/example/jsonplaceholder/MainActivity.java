@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.jsonplaceholder.adapters.PostAdapter;
 import com.example.jsonplaceholder.api.ApiFactory;
@@ -19,7 +20,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,18 +45,19 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Observer<List<Post>>() {
 
                                @Override
-                               public void onSubscribe( Disposable d) {
+                               public void onSubscribe(Disposable d) {
 
                                }
 
                                @Override
-                               public void onNext( List<Post> posts) {
-
+                               public void onNext(List<Post> posts) {
+                                   postAdapter.setPostList(posts);
                                }
 
                                @Override
                                public void onError(Throwable e) {
-
+                                   Toast.makeText(MainActivity.this, "yuklashda xatolik yuz berdi",
+                                           Toast.LENGTH_SHORT).show();
                                }
 
                                @Override
