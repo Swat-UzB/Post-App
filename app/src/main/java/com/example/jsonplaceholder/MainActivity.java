@@ -1,11 +1,12 @@
 package com.example.jsonplaceholder;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.jsonplaceholder.adapters.PostAdapter;
 import com.example.jsonplaceholder.api.ApiFactory;
@@ -13,7 +14,6 @@ import com.example.jsonplaceholder.api.ApiService;
 import com.example.jsonplaceholder.databinding.ActivityMainBinding;
 import com.example.jsonplaceholder.pojo.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         postAdapter = new PostAdapter();
         mainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mainBinding.recyclerView.setAdapter(postAdapter);
-        List<Post> posts = new ArrayList<>();
-        postAdapter.setPostList(posts);
         ApiFactory apiFactory = ApiFactory.getInstance();
         ApiService apiService = apiFactory.getApiService();
         apiService.getPosts()
@@ -52,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                                @Override
                                public void onNext(List<Post> posts) {
                                    postAdapter.setPostList(posts);
+                                   Log.d("TTT", "onNext: " + posts.size());
                                }
 
                                @Override
